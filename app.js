@@ -2,7 +2,7 @@ const express = require('express')
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 
-var restaurants = [{id:0,name:"Woodshill"},{id:1,name:"Fiorellas"}]
+var airplanes = [{id:0,name:"Woodshill"},{id:1,name:"Fiorellas"}]
 
 const app = express();
 app.use(express.json());
@@ -10,7 +10,7 @@ app.use(express.json());
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
-            title: "Restaurants API",
+            title: "airplanes API",
             version: "1.0.0"
         }
     },
@@ -18,18 +18,18 @@ const swaggerOptions = {
 }
 /**
  * @swagger
- * /restaurants:
+ * /airplanes:
  *  get:
- *      summary: get all restaurants
+ *      summary: get all airplanes
  *      produces:
  *          application/json
  *  responses:
  *      200: success
- *      description : an array of restaurants
+ *      description : an array of airplanes
  *      schema:
- *          $ref: "#definitions/restaurant"
+ *          $ref: "#definitions/airplane"
  * definitions:
- *  restaurant:
+ *  airplane:
  *      properties:
  *          id:
  *              type: integer
@@ -42,23 +42,23 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-app.get("/restaurants", (req,res)=>{
-    res.send(restaurants);
+app.get("/airplanes", (req,res)=>{
+    res.send(airplanes);
 })
 
 /**
  * @swagger
- * /restaurant:
+ * /airplane:
  *  post:
- *      summary: add a restaurant
+ *      summary: add a airplane
  *      requestBody:
- *          $ref: '#/components/requestBodies/RestaurantBody'
+ *          $ref: '#/components/requestBodies/airplaneBody'
  *      required:
  *          -id:
  *          -name:
  * responses:
  *          201:
- *              description: created restaurant
+ *              description: created airplane
  *
  * definitions:
  *  restaurant:
@@ -80,7 +80,7 @@ app.get("/restaurants", (req,res)=>{
  */
 
 
-app.post("/restaurant",(req,res)=>{
+app.post("/airplane",(req,res)=>{
     res.send(`${req.body.name} created`)
 })
 
